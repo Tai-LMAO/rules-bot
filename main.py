@@ -65,5 +65,9 @@ async def new_rule_legacy(ctx, *, rule_text: str):
     except discord.Forbidden:
         await ctx.send("❌ Missing permissions to post in the rules channel.")
 
-# Run the bot using the TOKEN env variable
-bot.run(os.getenv("TOKEN"))
+token = os.getenv("TOKEN")
+if not token:
+    print("❌ ERROR: TOKEN environment variable not set. Please set it in your .env or on Render.")
+else:
+    print("✅ TOKEN loaded successfully, starting bot...")
+    bot.run(token)
